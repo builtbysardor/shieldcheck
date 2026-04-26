@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShieldCheck Pro | Password Security Analyzer</title>
+    <meta name="description" content="Premium password security analyzer — check breach status and strength with ShieldCheck Pro.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Ambient Glow Blobs -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-shield">
+                    <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(0,245,255,0.1)" stroke="url(#shieldGrad)"/>
+                        <defs>
+                            <linearGradient id="shieldGrad" x1="4" y1="2" x2="20" y2="22">
+                                <stop offset="0%" stop-color="#00F5FF"/>
+                                <stop offset="100%" stop-color="#7C3AED"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h1>Shield<span class="accent">Check</span> <span class="pro-badge">PRO</span></h1>
+            </div>
+            <p class="subtitle">Verify your password against <strong>12+ billion</strong> breached records securely.</p>
+        </header>
+
+        <!-- Main Card -->
+        <main>
+            <div class="glass-card">
+                <!-- Password Input -->
+                <div class="input-group">
+                    <label for="passwordInput" class="input-label">Password to analyze</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="passwordInput" placeholder="Enter password..." autocomplete="off" spellcheck="false">
+                        <button id="toggleVisibility" type="button" aria-label="Toggle visibility" class="icon-btn">
+                            <svg id="eyeOpen" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            <svg id="eyeClosed" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Strength Bar -->
+                <div class="strength-section">
+                    <div class="strength-bar-track">
+                        <div id="strengthBar" class="strength-bar-fill"></div>
+                    </div>
+                    <div class="strength-info">
+                        <span id="strengthLabel" class="strength-label">—</span>
+                        <span id="entropyValue" class="entropy-value">0 bits entropy</span>
+                    </div>
+                </div>
+
+                <!-- Breach Status -->
+                <div id="breachCard" class="breach-card hidden">
+                    <div class="breach-icon-wrapper">
+                        <div id="breachDot" class="breach-dot"></div>
+                    </div>
+                    <div class="breach-info">
+                        <h3 id="breachTitle">Scanning...</h3>
+                        <p id="breachDesc">Checking breach database</p>
+                    </div>
+                </div>
+
+                <!-- Requirements -->
+                <div class="requirements">
+                    <div class="req-item" id="reqLength">
+                        <div class="req-check">
+                            <svg viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </div>
+                        <span>Minimum 12 characters</span>
+                    </div>
+                    <div class="req-item" id="reqUpper">
+                        <div class="req-check">
+                            <svg viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </div>
+                        <span>Uppercase letter (A-Z)</span>
+                    </div>
+                    <div class="req-item" id="reqLower">
+                        <div class="req-check">
+                            <svg viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </div>
+                        <span>Lowercase letter (a-z)</span>
+                    </div>
+                    <div class="req-item" id="reqNumber">
+                        <div class="req-check">
+                            <svg viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </div>
+                        <span>Number (0-9)</span>
+                    </div>
+                    <div class="req-item" id="reqSpecial">
+                        <div class="req-check">
+                            <svg viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </div>
+                        <span>Special character (!@#$)</span>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <button id="generateBtn" class="generate-btn" type="button">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+                    </svg>
+                    Generate Secure Password
+                </button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>ShieldCheck uses <a href="https://haveibeenpwned.com/API/v3#PwnedPasswords" target="_blank" rel="noopener">k-anonymity</a> — your full password <strong>never leaves this device</strong>.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

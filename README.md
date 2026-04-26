@@ -1,37 +1,64 @@
-# ShieldCheck | Password Security Analyzer 🛡️
+# ShieldCheck Pro | Password Security Analyzer 🛡️
 
-ShieldCheck is a modern, privacy-focused tool built to analyze password strength and check if your credentials have been compromised in data breaches. It integrates with the **HaveIBeenPwned (HIBP) API** using secure, anonymous protocols.
+A premium, privacy-focused cybersecurity tool that analyzes password strength and checks for data breaches using the **HaveIBeenPwned (HIBP)** API with the **k-anonymity** protocol.
 
-## 🚀 Demo
+## 🚀 Live Demo
 
-Below is a recording of ShieldCheck in action, testing both weak (compromised) and strong passwords:
+![ShieldCheck Pro Demo](media/demo_recording.webp)
 
-![ShieldCheck Demo](media/demo_recording.webp)
+## ✨ Features
 
-## ✨ Key Features
+| Feature | Description |
+|---|---|
+| 🔍 **Breach Detection** | Checks passwords against 12+ billion leaked records via HIBP API |
+| 🔐 **k-Anonymity Protocol** | Only SHA-1 hash prefix (5 chars) is sent — your password never leaves your device |
+| 📊 **Entropy Analysis** | Real-time entropy calculation in bits |
+| 💪 **Strength Meter** | Visual Weak → Fair → Good → Very Strong rating |
+| 🔑 **Password Generator** | One-click secure password generation (18 chars, all character types) |
+| 🎨 **Premium UI** | Apple + Cyber glassmorphism design with particle animations |
 
-- **Pwned Passwords Integration**: Checks if a password has appeared in over 12 billion leaked records.
-- **Privacy-First (k-Anonymity)**: Uses SHA-1 hashing locally. Only the first 5 characters of the hash prefix are sent to the HIBP API, ensuring your password remains private.
-- **Real-Time Strength Meter**: Calculates entropy and visualizes password strength instantly.
-- **Modern UI**: Dark mode, glassmorphism aesthetics, and responsive design.
+## 📸 Screenshots
 
-## 🛠️ Built With
+### Initial State
+![Initial State](media/screenshot_initial.png)
 
-- **HTML5 & CSS3**: Custom design system with modern typography (Orbitron/Outfit).
-- **Vanilla JavaScript**: For all logic and API interactions.
-- **Web Crypto API**: For secure SHA-1 hashing on the client side.
+### Compromised Password Detected
+![Compromised Password](media/screenshot_compromised.png)
 
-## 📸 Screenshot
+### Secure Generated Password
+![Secure Password](media/screenshot_secure.png)
 
-![ShieldCheck Dashboard](media/screenshot.png)
+## 🛠️ Tech Stack
 
-## 📖 How to Use
+- **HTML5** — Semantic structure with SVG icons
+- **CSS3** — Custom design system, glassmorphism, CSS animations (FPS-optimized)
+- **JavaScript (ES6+)** — Web Crypto API for SHA-1, HIBP Range API, requestAnimationFrame particles
+- **API** — [HaveIBeenPwned Pwned Passwords](https://haveibeenpwned.com/API/v3#PwnedPasswords)
 
-1. Clone or download the repository.
-2. Open `index.html` in any modern web browser.
-3. Type a password to see its security status.
+## 🔒 How It Works
 
----
-*Created for Cyber Security Project Portfolio.*
-# ShieldCheck-Password-Security-Analyzer-
-# ShieldCheck-Password-Security-Analyzer-
+```
+User enters password
+        ↓
+SHA-1 hash generated locally (Web Crypto API)
+        ↓
+First 5 characters of hash sent to HIBP API
+        ↓
+API returns all matching hash suffixes
+        ↓
+Local comparison — password never transmitted
+```
+
+## 📖 Usage
+
+1. Clone the repository
+2. Open `index.html` in any modern browser
+3. Enter a password or click **Generate Secure Password**
+
+```bash
+git clone https://github.com/builtbysardor/ShieldCheck-Password-Security-Analyzer-.git
+cd ShieldCheck-Password-Security-Analyzer-
+# Open index.html in your browser
+```
+
+

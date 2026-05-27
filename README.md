@@ -6,6 +6,14 @@
 [![Web Crypto API](https://img.shields.io/badge/Web%20Crypto%20API-native-green?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
+## Demo
+
+![ShieldCheck Demo](media/demo_recording.webp)
+
+| Secure Password | Compromised Password | Initial State |
+|:-:|:-:|:-:|
+| ![Secure](media/screenshot_secure.png) | ![Compromised](media/screenshot_compromised.png) | ![Initial](media/screenshot_initial.png) |
+
 ## Features
 
 - Real-time password strength and entropy analysis
